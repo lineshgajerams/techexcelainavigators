@@ -74,11 +74,11 @@ def deploy_flow(endpoint_name, deployment_name):
     deployment = ManagedOnlineDeployment(
         name=deployment_name,
         endpoint_name=endpoint_name,
-        model=Model(
-            name="ragflow",
-            path=flow_path,  # path to promptflow folder
-            properties=[ # this enables the chat interface in the endpoint test tab
-                ["azureml.promptflow.source_flow_id", "ragflow"],
+        model = Model(
+            name="ragwithtrace",
+            path=flow_path,  # path to the promptflow folder
+            properties=[  # enables the chat interface in the endpoint test tab
+                ["azureml.promptflow.source_flow_id", "ragwithtrace"],
                 ["azureml.promptflow.mode", "chat"],
                 ["azureml.promptflow.chat_input", "question"],
                 ["azureml.promptflow.chat_output", "answer"]
@@ -113,6 +113,9 @@ def deploy_flow(endpoint_name, deployment_name):
             "AZURE_SUBSCRIPTION_ID": os.environ["AZURE_SUBSCRIPTION_ID"],
             "AZURE_RESOURCE_GROUP": os.environ["AZURE_RESOURCE_GROUP"],
             "AZUREAI_PROJECT_NAME": os.environ["AZUREAI_PROJECT_NAME"],
+            "AZURE_TENANT_ID": os.environ["AZURE_TENANT_ID"],
+            "AZURE_CLIENT_ID": os.environ["AZURE_CLIENT_ID"],
+            "AZURE_CLIENT_SECRET": os.environ["AZURE_CLIENT_SECRET"],
             "AZURE_OPENAI_ENDPOINT": azure_config.aoai_endpoint,
             "AZURE_OPENAI_API_VERSION": azure_config.aoai_api_version,
             "AZURE_SEARCH_ENDPOINT": azure_config.search_endpoint,
